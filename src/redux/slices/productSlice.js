@@ -35,6 +35,7 @@ const productSlice = createSlice({
       hero: [],
       featured: [],
       all: [],
+      search: [],
     },
     loadingByTag: {
       hero: false,

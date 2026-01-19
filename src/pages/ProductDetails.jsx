@@ -3,10 +3,7 @@ import { useParams } from "react-router-dom";
 import { addToCart } from "../redux/slices/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchProductById,
-  fetchRelatedProducts,
-} from "../redux/slices/productSlice";
+import { fetchProductById,fetchRelatedProducts } from "../redux/slices/productSlice";
 
 const ProductDetails = () => {
   const { id } = useParams(); // ✅ get product id from URL
@@ -36,9 +33,6 @@ const loading = useSelector(
   (state) => state.products.productDetails.loading
 );
 
-
-
-
 useEffect(() => {
   if (!id) return;
   dispatch(fetchProductById(id));
@@ -56,7 +50,6 @@ useEffect(() => {
     })
   );
 }, [product, dispatch]);
-
 
   if (loading || !product) {
     return (

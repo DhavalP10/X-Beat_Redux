@@ -11,11 +11,9 @@ import { store } from './redux/store.js'
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
       <SearchProvider>
-        <ProductProvider>
           <Provider store={store}>
             <App />
           </Provider>
-        </ProductProvider>
       </SearchProvider>
   </BrowserRouter>
 )

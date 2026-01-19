@@ -21,31 +21,32 @@ function TopProduct() {
 
   const categories = ["All", "Headphones", "Earphones", "Neckbands", "Earbuds"];
 
-  /* ===================== FETCH ALL PRODUCTS ONCE ===================== */
-  useEffect(() => {
-    if (products.length === 0) {
-      dispatch(
-        fetchProducts({
-          type: "all",     // 🔑 Redux key only
-          filters: {},    // ✅ NO filters → get ALL products
-        })
-      );
-    }
-  }, [dispatch, products.length]);
-
-  /* ===================== FRONTEND CATEGORY FILTER ===================== */
-  const filteredProducts =
-    activeCategory === "All"
-      ? products
-      : products.filter(
-          (item) => item.category === activeCategory
-        );
-
-  /* ===================== SHOW 11 + BROWSE ALL ===================== */
   const visibleProducts =
-    activeCategory === "All"
-      ? filteredProducts.slice(0, 11)
-      : filteredProducts;
+  activeCategory === "All"
+    ? products.slice(0, 11)
+    : products;
+
+  /* ===================== FETCH ALL PRODUCTS ONCE ===================== */
+  
+
+  useEffect(() => {
+  if (activeCategory === "All") {
+    dispatch(
+      fetchProducts({
+        type: "all",
+        filters: {}, // get ALL products
+      })
+    );
+  } else {
+    dispatch(
+      fetchProducts({
+        type: "all",
+        filters: { category: activeCategory }, // backend filter
+      })
+    );
+  }
+}, [activeCategory, dispatch]);
+
 
   return (
     <div className="bg-[#121212] min-h-screen flex flex-col items-center pt-20 px-4">
